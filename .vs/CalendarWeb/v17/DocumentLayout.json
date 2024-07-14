@@ -1,0 +1,169 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\repository\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\repository\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\repository\\irepository\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\repository\\irepository\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|c:\\users\\nikdr\\desktop\\workdirectory\\projects\\calendarweb\\calendar.dataaccess\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0C0F87F-2A4B-4372-8D38-2BA541FDBA70}|Calendar.DataAccess\\Calendar.DataAccess.csproj|solutionrelative:calendar.dataaccess\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 13,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Repository\\Repository.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\Repository.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Repository\\Repository.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAABYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:44:50.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Repository\\CategoryRepository.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\CategoryRepository.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Repository\\CategoryRepository.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:43:48.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EventRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\EventRepository.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Repository\\EventRepository.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\EventRepository.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Repository\\EventRepository.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAEAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:41:29.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:40:23.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:39:11.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Calendar.DataAccess\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Calendar.DataAccess\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T11:30:34.216Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

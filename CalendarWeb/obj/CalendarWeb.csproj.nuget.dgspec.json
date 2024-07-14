@@ -1,0 +1,245 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\CalendarWeb\\CalendarWeb.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Calendar.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Calendar.DataAccess.csproj",
+        "projectName": "Calendar.DataAccess",
+        "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Calendar.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\NikDr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\NikDr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj": {
+                "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj",
+        "projectName": "Calendar.Models",
+        "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj",
+        "packagesPath": "C:\\Users\\NikDr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\NikDr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\CalendarWeb\\CalendarWeb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\CalendarWeb\\CalendarWeb.csproj",
+        "projectName": "CalendarWeb",
+        "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\CalendarWeb\\CalendarWeb.csproj",
+        "packagesPath": "C:\\Users\\NikDr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\CalendarWeb\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\NikDr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Calendar.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.DataAccess\\Calendar.DataAccess.csproj"
+              },
+              "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj": {
+                "projectPath": "C:\\Users\\NikDr\\Desktop\\WorkDirectory\\Projects\\CalendarWeb\\Calendar.Models\\Calendar.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

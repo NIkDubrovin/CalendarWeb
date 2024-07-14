@@ -1,0 +1,17 @@
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.DataAccess.deps.json
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.DataAccess.runtimeconfig.json
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.DataAccess.dll
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.DataAccess.pdb
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.csproj.AssemblyReference.cache
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.AssemblyInfoInputs.cache
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.AssemblyInfo.cs
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.dll
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\refint\Calendar.DataAccess.dll
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.pdb
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.DataAccess.genruntimeconfig.cache
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\ref\Calendar.DataAccess.dll
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.Models.dll
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\bin\Debug\net8.0\Calendar.Models.pdb
+C:\Users\NikDr\Desktop\WorkDirectory\Projects\CalendarWeb\Calendar.DataAccess\obj\Debug\net8.0\Calendar.C3ECA2E3.Up2Date
