@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Calendar.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240715155511_addEventTable")]
+    [Migration("20240715221907_addEventTable")]
     partial class addEventTable
     {
         /// <inheritdoc />
@@ -33,12 +33,12 @@ namespace Calendar.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Color")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("Date")
+                    b.Property<string>("Color")
                         .IsRequired()
-                        .HasColumnType("Date");
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -53,22 +53,22 @@ namespace Calendar.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Color = 255L,
-                            Date = new DateTime(2024, 7, 15, 23, 55, 11, 241, DateTimeKind.Local).AddTicks(6481),
+                            Color = "FF0000",
+                            Date = new DateTime(2024, 7, 16, 6, 19, 6, 962, DateTimeKind.Local).AddTicks(6851),
                             Title = "Lunch"
                         },
                         new
                         {
                             Id = 2,
-                            Color = 16711680L,
-                            Date = new DateTime(2024, 7, 15, 19, 55, 11, 241, DateTimeKind.Local).AddTicks(6514),
+                            Color = "FFFF00",
+                            Date = new DateTime(2024, 7, 16, 2, 19, 6, 962, DateTimeKind.Local).AddTicks(6867),
                             Title = "Work"
                         },
                         new
                         {
                             Id = 3,
-                            Color = 32768L,
-                            Date = new DateTime(2024, 7, 15, 15, 55, 11, 241, DateTimeKind.Local).AddTicks(6520),
+                            Color = "00FFFF",
+                            Date = new DateTime(2024, 7, 15, 22, 19, 6, 962, DateTimeKind.Local).AddTicks(6869),
                             Title = "Start"
                         });
                 });

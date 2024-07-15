@@ -22,13 +22,10 @@ namespace CalendarWeb.Controllers
         }
 
         public IActionResult Index()
-        {
-            string test = DateTime.Now.ToString("MMMM yyyy");
-            string n = DateTime.Now.ToString("MMMM yyyy").TrimEnd();
-
+        {         
             CalendarVM calendarVM = new()
-            {                
-                Events = new List<Event>()
+            {
+                Events = _unitOfWork.Event.GetAll()
             };
 
             return View(calendarVM);
@@ -38,7 +35,7 @@ namespace CalendarWeb.Controllers
         {
             CalendarVM calendarVM = new()
             {              
-                Events = new List<Event>(),
+                Events = _unitOfWork.Event.GetAll(),
                 CurrentDate = date.AddMonths(-1)
             };
 
@@ -49,7 +46,7 @@ namespace CalendarWeb.Controllers
         {
             CalendarVM calendarVM = new()
             {
-                Events = new List<Event>(),
+                Events = _unitOfWork.Event.GetAll(),
                 CurrentDate = date.AddMonths(1)
             };
 
@@ -61,45 +58,5 @@ namespace CalendarWeb.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        #region API CALLS
-        //[HttpGet]
-        //public IActionResult Event(int? id)
-        //{
-        //    Event ev = _unitOfWork.Event.Get(p => p.Id == id);
-        //    return Json(new {data = ev});
-        //}
-
-        //[HttpDelete]
-        //public IActionResult Event(int? id)
-        //{
-        //    Event ev = _unitOfWork.Event.Get(p => p.Id == id);
-        //    return Json(new { data = ev });
-        //}
-
-        //[HttpPost]
-        //public IActionResult Event(Event ev)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (ev.Id == 0)
-        //        {
-        //            _unitOfWork.Event.Add(ev);
-        //        }
-        //        else
-        //        {
-        //            _unitOfWork.Event.Update(ev);
-        //        }
-
-        //        _unitOfWork.Save();
-        //        TempData["success"] = "Product created successfully";
-        //        return Json(new { data = "success" });
-        //    }
-        //    else
-        //    {
-        //        return Json(new { data = "error" });
-        //    }
-        //}
-        #endregion
     }
 }

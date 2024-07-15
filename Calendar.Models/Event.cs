@@ -15,12 +15,9 @@ namespace Calendar.Models
         public string? Title { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
-        [Column(TypeName = "Date")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
-        [Range(0, 0xFFFFFF, ErrorMessage = "Color is not valid.")]
-        public uint Color { get; set; }
+        public string? Color { get; set; }
     }
 }

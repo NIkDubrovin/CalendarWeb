@@ -16,13 +16,25 @@
             {
                 @for (i = 0; i < (int)firstDayOfWeek; i++)
                 {
-                    <div class="col day bg-primary">@(numberDaysInLastMonth - (int)firstDayOfWeek + i)</div>
+                    <div class="col day day-nonactive">@(numberDaysInLastMonth - (int)firstDayOfWeek + i)</div>
                 }
             }
 
             @for (; i < 7; i++, dayIndex++)
             {
-                <div class="col day">@(dayIndex + 1)</div>
+                <div class="col day">
+                    @(dayIndex + 1)
+                    @{
+                        foreach(var ev in @Model.Events)
+                        {
+                            if(ev.Date.Day == i + 1)
+                            {
+                                <p style="background-color:@("#" + ev.Color)">@ev.Title</p>
+                                break;
+                            }
+                        }
+                    }                 
+                </div>
             }
         </div>
 
@@ -37,7 +49,7 @@
                 {
                     @if (dayIndex >= numberDaysInCurrentMonth)
                     {
-                        <div class="col day bg-primary">@(++dayInNextMonth)</div>
+                        <div class="col day day-nonactive">@(++dayInNextMonth)</div>
                     }
                     else
                     {
@@ -48,7 +60,7 @@
             }
         }
 
-    string[] colors = { "Black", "White", "Red", "Green", "Blue", "Yellow", "Cyan", "Magenta", "Gray", "Orange" };
+    string[] colors = { "C0C0C0", "000000", "FF0000", "F4D03F", "00FF00", "00FFFF", "0000FF", "FF00FF", "800080" };
 }
 
 <div class="toast bg-danger" id="errorToast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
@@ -91,16 +103,16 @@
                         </div>                              
                         <div class="mb-3 row p-1">
                             <label asp-for="_event.Color" class="p-0"></label>
-                            <input id="color-input" asp-for="_event.Color" type="hidden" class="form-control">
+                            <input id="create-color-input" class="color-input" asp-for="_event.Color" type="hidden" class="form-control">
                             @for (int i = 0; i < colors.Length; i++)
                             {
-                                <button type="button" class="color-button m-1" style="background-color: @( Utils.ColorToHexString(Color.FromName(colors[i])))">
+                                <button type="button" class="color-button m-1" style="background-color: @("#" + colors[i]);">
                                 </button>
                             }
 
                             <label style="width:50px; height:50px;">
                                 <i class="bi bi-palette"></i>
-                                <input type="color" id="color-picker-input" class="color-picker-input" style="display:none;" width="0" height="0">
+                                <input type="color" id="color-input" style="display:none;" width="0" height="0">
                             </label>
 
                             <span asp-validation-for="_event.Color" class="text-danger"></span>           
@@ -116,82 +128,153 @@
     </div>
 </div>
 
+<div class="modal fade" id="editEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Event</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editEventForm" method="post" action="javascript:void(0);" onsubmit="editEvent()">
+                    <input id="edit-id" asp-for="_event.Id" type="hidden">
+
+                    <div class="border p-3">
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Title" class="p-0"></label>
+                            <input asp-for="_event.Title" type="text" id="edit-title" class="form-control" />
+                            <span asp-validation-for="_event.Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Date" class="p-0"></label>
+                            <input asp-for="_event.Date" type="datetime-local" id="edit-date" class="form-control" />
+                            <span asp-validation-for="_event.Date" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Color" class="p-0"></label>
+                            <input id="edit-color-input" class="color-input" asp-for="_event.Color" type="hidden" class="form-control">
+                            @for (int i = 0; i < colors.Length; i++)
+                            {
+                                <button type="button" class="color-button m-1" style="background-color: @("#" + colors[i]);">
+                                </button>
+                            }
+
+                            <label style="width:50px; height:50px;">
+                                <i class="bi bi-palette"></i>
+                                <input type="color" id="color-input"  style="display:none;" width="0" height="0">
+                            </label>
+
+                            <span asp-validation-for="_event.Color" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="editEventForm" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deleteEventModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure, you want to delete this event?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="deleteButton" onclick="deleteEvent(this.id)" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row ">
-        <div class="col-3">
-            <div class="container mt-5">
+        <div class="card shadow border-0 my-5">
+            <div class="card-header bg-secondary bg-gradient ml-0 py-3">
                 <div class="row">
-                    <div class="col">
-
-                        <!-- Card List -->
-                        <div class="card-group">
-                            <!-- Card 1 -->
-                            <div class="event-card card shadow border-0 my-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">2023-03-21</h5> <!-- Date at the top -->
-                                    <p class="card-text">Title of Card 1</p> <!-- Title at the bottom -->
+                    <div class="col-12 text-center">
+                        <h2 class="text-white py-2">Event Calendar</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-3 my-5" style="overflow-y: scroll; height:60vh">
+                        <div class="list-group">
+                            @foreach (var obj in Model.Events)
+                            {
+                                <div class="event-card card shadow border-0 my-1">
+                                    <div class="card-body" style="color: white; background-color: @("#" + obj.Color);">
+                                        <div class="card-title row">
+                                            <div class="col-8">
+                                                <h6 class="card-title">@(Utils.ConvertDate(obj.Date))</h6>
+                                            </div>
+                                            
+                                            <div class="text-center col-4">
+                                                <div class="w-10 btn-group btn-group-sm" role="group">
+                                                    <a id="@obj.Id" class="btn btn-primary event-update-link" style="font-size:small;">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a id="@obj.Id" class="btn btn-danger event-delete-link">
+                                                        <i class="bi bi-trash" style="font-size:small;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-text">@obj.Title</p>
+                                    </div>
                                 </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="row pb-3">
+                            <div class="col-6">
                             </div>
-
-                            <!-- Add more cards here as needed -->
-
+                            <div class="col-6 text-end">
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+                                    <i class="bi bi-plus-circle"></i>  Create New Event
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row py-3">
+                            <div class="col-8 ps-5">
+                                <h4 id="currentDate">@Model.CurrentDate.ToString("MMMM yyyy")</h4>
+                            </div>
+                            <div class="col-4 text-end my-auto">
+                                <a asp-controller="Home" asp-action="Left" asp-route-date="@Model.CurrentDate" class="btn btn-light"><i class="bi bi-chevron-left"></i></a>
+                                <a asp-controller="Home" asp-action="Right" asp-route-date="@Model.CurrentDate" class="btn  btn-light"><i class="bi bi-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ------------------------------ week row ------------------------------- -->
+                        <div class="container">
+                            <div class="row week-row">
+                                <div class="col week-col">Sun</div>
+                                <div class="col week-col">Mon</div>
+                                <div class="col week-col">Tue</div>
+                                <div class="col week-col">Wed</div>
+                                <div class="col week-col">Thu</div>
+                                <div class="col week-col">Fri</div>
+                                <div class="col week-col">Sat</div>
+                            </div>
+                        </div>
+                        <div class="container days-table">
+                            @{
+                                RenderCalendar();
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <div class="col-9">
-                <div class="card shadow border-0 my-4">
-                <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h2 class="text-white py-2">Event Calendar</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-4">
-                    <div class="row pb-3">
-                        <div class="col-6">
-                        </div>
-                        <div class="col-6 text-end">
-                            <a asp-controller="Home" asp-action="Upsert" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
-                                <i class="bi bi-plus-circle"></i>  Create New Event
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row py-3">
-                        <div class="col-8 ps-5">
-                            <h4 id="currentDate">@Model.CurrentDate.ToString("MMMM yyyy")</h4>
-                        </div>
-                        <div class="col-4 text-end my-auto">
-                            <a asp-controller="Home" asp-action="Left" asp-route-date="@Model.CurrentDate" class="btn btn-light"><i class="bi bi-chevron-left"></i></a>
-                            <a asp-controller="Home" asp-action="Right" asp-route-date="@Model.CurrentDate" class="btn  btn-light"><i class="bi bi-chevron-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- ------------------------------ week row ------------------------------- -->
-                    <div class="container">
-                        <div class="row week-row">
-                            <div class="col week-col">Sun</div>
-                            <div class="col week-col">Mon</div>
-                            <div class="col week-col">Tue</div>
-                            <div class="col week-col">Wed</div>
-                            <div class="col week-col">Thu</div>
-                            <div class="col week-col">Fri</div>
-                            <div class="col week-col">Sat</div>
-                        </div>
-                    </div>
-
-                    <div class="container days-table">
-                        @{
-                            RenderCalendar();
-                        }
-                    </div>
-
-                </div>
-            </div>
-            </div>    
     </div>
 </div>
 

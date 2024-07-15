@@ -21,8 +21,8 @@ namespace Calendar.DataAccess.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    Date = table.Column<DateTime>(type: "Date", nullable: false),
-                    Color = table.Column<long>(type: "bigint", nullable: false)
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Color = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,9 +34,9 @@ namespace Calendar.DataAccess.Migrations
                 columns: new[] { "Id", "Color", "Date", "Title" },
                 values: new object[,]
                 {
-                    { 1, 255L, new DateTime(2024, 7, 15, 23, 55, 11, 241, DateTimeKind.Local).AddTicks(6481), "Lunch" },
-                    { 2, 16711680L, new DateTime(2024, 7, 15, 19, 55, 11, 241, DateTimeKind.Local).AddTicks(6514), "Work" },
-                    { 3, 32768L, new DateTime(2024, 7, 15, 15, 55, 11, 241, DateTimeKind.Local).AddTicks(6520), "Start" }
+                    { 1, "FF0000", new DateTime(2024, 7, 16, 6, 19, 6, 962, DateTimeKind.Local).AddTicks(6851), "Lunch" },
+                    { 2, "FFFF00", new DateTime(2024, 7, 16, 2, 19, 6, 962, DateTimeKind.Local).AddTicks(6867), "Work" },
+                    { 3, "00FFFF", new DateTime(2024, 7, 15, 22, 19, 6, 962, DateTimeKind.Local).AddTicks(6869), "Start" }
                 });
         }
 

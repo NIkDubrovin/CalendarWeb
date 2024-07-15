@@ -2,6 +2,7 @@
 using Calendar.DataAccess.Repository.IRepository;
 using Calendar.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CalendarWeb.Controllers
 {
@@ -48,7 +49,6 @@ namespace CalendarWeb.Controllers
             {            
                 _unitOfWork.Event.Add(value);
                 _unitOfWork.Save();
-               // TempData["success"] = "Event created successfully";
                 return Ok(value);
             }
             else
@@ -59,15 +59,54 @@ namespace CalendarWeb.Controllers
 
         // PUT api/<EventController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Event value)
+        public IActionResult PutEvent(int id, [FromBody] Event value)
         {
+            if (ModelState.IsValid)
+            {
+                if (id != value.Id)
+                {
+                    return BadRequest();
+                }
 
+                var oldValue = _unitOfWork.Event.Get(e => e.Id == id);  
+                if (oldValue == null)
+                {
+                    return NotFound();
+                }
+
+                oldValue.Title = value.Title;
+                oldValue.Date = value.Date;
+                oldValue.Color = value.Color;
+
+                _unitOfWork.Event.Update(value);
+                _unitOfWork.Save();
+                
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE api/<EventController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteEvent(int? id)
         {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Event? ev = _unitOfWork.Event.Get(c => c.Id == id);
+            if (ev == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Event.Remove(ev);
+            _unitOfWork.Save();
+
+            return Ok();
         }
     }
 }

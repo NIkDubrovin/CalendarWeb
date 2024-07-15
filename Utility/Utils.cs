@@ -13,5 +13,15 @@ namespace Calendar.Utils
         {
             return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
         }
+
+        public static string UintHexToString(uint value)
+        {
+            return "#" + value.ToString("X");
+        }
+
+        public static string ConvertDate(DateTime date)
+        {
+            return date.ToString("dddd - dd MMM hh:mm tt");
+        }
     }
 }

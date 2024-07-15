@@ -19,10 +19,16 @@ namespace Calendar.DataAccess.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Event>()
+                .Property(e => e.Date)
+                .HasConversion(
+                    v => v,
+                    v => new DateTime(v.Ticks, DateTimeKind.Unspecified));
+            //modelBuilder.Entity<Event>().Property(e => e.Date).HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Unspecified));
             modelBuilder.Entity<Event>().HasData(
-                new Event { Id = 1, Title = "Lunch", Date = DateTime.Now.AddHours(5), Color = Utils.Utils.ColorToHexUInt(Color.Blue)},
-                new Event { Id = 2, Title = "Work", Date = DateTime.Now.AddHours(1), Color = Utils.Utils.ColorToHexUInt(Color.Red) },
-                new Event { Id = 3, Title = "Start", Date = DateTime.Now.AddHours(-3), Color = Utils.Utils.ColorToHexUInt(Color.Green)});             
+                new Event { Id = 1, Title = "Lunch", Date = DateTime.Now.AddHours(5), Color = "FF0000" },
+                new Event { Id = 2, Title = "Work", Date = DateTime.Now.AddHours(1), Color = "FFFF00" },
+                new Event { Id = 3, Title = "Start", Date = DateTime.Now.AddHours(-3), Color = "00FFFF" });             
         }
     }
 }

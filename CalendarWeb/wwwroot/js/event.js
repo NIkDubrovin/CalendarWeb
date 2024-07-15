@@ -1,6 +1,41 @@
 ﻿const uri = 'api/event';
 
-$('#myToast .toast-body').text('New Toast Body Content');
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.color-button');
+    const colorsInputs = document.querySelectorAll('.color-input');
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', function () {
+            buttons.forEach((button, index) => {
+                button.style.border = 0;
+            });
+
+            colorsInputs.forEach((input, index) => {
+                let bgColor = this.style.backgroundColor;
+                input.value = rgbToHex(bgColor);
+            });
+
+            this.style.border = "5px solid black";
+            this.classList.add('active')
+        });
+    });
+
+    const updateLinks = document.querySelectorAll('.event-update-link');
+    const deleteLinks = document.querySelectorAll('.event-delete-link');
+
+    updateLinks.forEach((button, index) => {
+        button.addEventListener('click', function () {
+            displayEditForm(this.id)
+        });
+    });
+
+    deleteLinks.forEach((button, index) => {
+        button.addEventListener('click', function () {
+            document.getElementById('deleteButton').id = this.id;
+            $('#deleteEventModal').modal('show');
+        });
+    });
+});
 
 function getEvents() {
     fetch(uri)
@@ -12,14 +47,15 @@ function getEvents() {
 function addEvent() {
     const TitleTextBox = document.getElementById('create-title');
     const DateInput = document.getElementById('create-date');
-    const ColorInput = document.getElementById('color-input');
+    const ColorInput = document.getElementById('edit-color-input');
 
     const item = {
         title: TitleTextBox.value,
-        //startDate: new Date(DateInput.value).toISOString(), //"2011-12-19T15:28:46.493Z",
         date: DateInput.value,
-        color: parseInt(ColorInput.value, 16)
+        color: ColorInput.value
     };
+
+    console.log(JSON.stringify(item))
 
     fetch(uri, {
         method: 'POST',
@@ -31,7 +67,7 @@ function addEvent() {
     })
     .then(response => {
         if (response.ok) {
-           // window.location.reload();
+           window.location.reload();
 
             $('#successToast .toast-body').text('Event created!');
             var myToastEl = document.getElementById('successToast')
@@ -45,7 +81,7 @@ function addEvent() {
     .then(data => console.log(data))
         .catch(error => {
             console.error('Unable to add item.', error)
-
+            window.location.reload();
         $('#errorToast .toast-body').text('Event isnt created!');
         var myToastEl = document.getElementById('errorToast')
         var myToast = bootstrap.Toast.getInstance(myToastEl)
@@ -56,56 +92,87 @@ function addEvent() {
      });
 }
 
-function addItem() {
-    const addNameTextbox = document.getElementById('add-name');
-
-    const item = {
-        isComplete: false,
-        name: addNameTextbox.value.trim()
-    };
-
-    fetch(uri, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(item)
-    })
-        .then(response => response.json())
-        .then(() => {
-            getItems();
-            addNameTextbox.value = '';
-        })
-        .catch(error => console.error('Unable to add item.', error));
-}
-
-function deleteItem(id) {
+function deleteEvent(id) {
     fetch(`${uri}/${id}`, {
         method: 'DELETE'
     })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to delete item.', error));
+        .then(response => {
+            if (response.ok) {
+                window.location.reload();
+
+                $('#successToast .toast-body').text('Event created!');
+                var myToastEl = document.getElementById('successToast')
+                var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
+                if (myToast != null)
+                    myToast.show()
+
+                $('#deleteEventModal').modal('hide');
+            }
+        })
+        .catch(error => {
+            console.error('Unable to add item.', error)
+            window.location.reload();
+            $('#errorToast .toast-body').text('Event isnt created!');
+            var myToastEl = document.getElementById('errorToast')
+            var myToast = bootstrap.Toast.getInstance(myToastEl)
+            if (myToast != null)
+                myToast.show()
+
+            $('#deleteEventModal').modal('hide');
+        });
+}
+
+function Event(id, title, date, color) {
+    this.id = id;
+    this.title = title;
+    this.date = date;
+    this.color = color;
 }
 
 function displayEditForm(id) {
-    const item = todos.find(item => item.id === id);
+    fetch(`${uri}/${id}`)
+    .then(response => response.json())
+     .then(data => {
+        $('#editEventModal').modal('show');
+        const IdTextBox = document.getElementById('edit-id');
+        const TitleTextBox = document.getElementById('edit-title');
+        const DateInput = document.getElementById('edit-date');
+        const ColorInput = document.getElementById('edit-color-input');
+        const event = new Event(data.id, data.title, data.date, data.color);
 
-    document.getElementById('edit-name').value = item.name;
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('edit-isComplete').checked = item.isComplete;
-    document.getElementById('editForm').style.display = 'block';
+        IdTextBox.value = event.id;
+        TitleTextBox.value = event.title;
+        DateInput.value = event.date;
+        ColorInput.value = event.color;
+
+         const buttons = document.querySelectorAll('.color-button');
+
+         buttons.forEach((button, index) => {
+             button.style.border = 0;
+             let hexColor = rgbToHex(button.style.backgroundColor);
+             if (hexColor.toUpperCase() == ColorInput.value.toUpperCase()) {
+                 button.style.border = "5px solid black";
+                 button.classList.add('active')
+             }
+         });
+    })
+    .catch(error => console.error('Unable to get items.', error));
 }
 
-function updateItem() {
-    const itemId = document.getElementById('edit-id').value;
+function editEvent() {
+    const IdTextBox = document.getElementById('edit-id');
+    const TitleTextBox = document.getElementById('edit-title');
+    const DateInput = document.getElementById('edit-date');
+    const ColorInput = document.getElementById('edit-color-input');
+
     const item = {
-        id: parseInt(itemId, 10),
-        isComplete: document.getElementById('edit-isComplete').checked,
-        name: document.getElementById('edit-name').value.trim()
+        id: IdTextBox.value,
+        title: TitleTextBox.value,
+        date: DateInput.value,
+        color: ColorInput.value
     };
 
-    fetch(`${uri}/${itemId}`, {
+    fetch(`${uri}/${IdTextBox.value}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -113,61 +180,30 @@ function updateItem() {
         },
         body: JSON.stringify(item)
     })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
+    .then(response => {
+        if (response.ok) {
+            window.location.reload();
+            $('#successToast .toast-body').text('Event updated!');
+            var myToastEl = document.getElementById('successToast')
+            var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
+            if (myToast != null)
+                myToast.show()
 
-    closeInput();
+            $('#editEventModal').modal('hide');
+        } else {
+            console.log(response.json())
+        }
+    })
+        .catch(error => {
+            window.location.reload();
+            console.error('Unable to update item.', error)
+        $('#errorToast .toast-body').text('Event isnt created!');
+        var myToastEl = document.getElementById('errorToast')
+        var myToast = bootstrap.Toast.getInstance(myToastEl)
+        if (myToast != null)
+            myToast.show()
 
-    return false;
-}
-
-function closeInput() {
-    document.getElementById('editForm').style.display = 'none';
-}
-
-function _displayCount(itemCount) {
-    const name = (itemCount === 1) ? 'to-do' : 'to-dos';
-
-    document.getElementById('counter').innerText = `${itemCount} ${name}`;
-}
-
-function _displayItems(data) {
-    const tBody = document.getElementById('todos');
-    tBody.innerHTML = '';
-
-    _displayCount(data.length);
-
-    const button = document.createElement('button');
-
-    data.forEach(item => {
-        let isCompleteCheckbox = document.createElement('input');
-        isCompleteCheckbox.type = 'checkbox';
-        isCompleteCheckbox.disabled = true;
-        isCompleteCheckbox.checked = item.isComplete;
-
-        let editButton = button.cloneNode(false);
-        editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
-
-        let deleteButton = button.cloneNode(false);
-        deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
-
-        let tr = tBody.insertRow();
-
-        let td1 = tr.insertCell(0);
-        td1.appendChild(isCompleteCheckbox);
-
-        let td2 = tr.insertCell(1);
-        let textNode = document.createTextNode(item.name);
-        td2.appendChild(textNode);
-
-        let td3 = tr.insertCell(2);
-        td3.appendChild(editButton);
-
-        let td4 = tr.insertCell(3);
-        td4.appendChild(deleteButton);
+        $('#editEventModal').modal('hide');
+        
     });
-
-    todos = data;
 }
