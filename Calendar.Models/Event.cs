@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,7 +20,7 @@ namespace Calendar.Models
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        //[ValidateNever]
+        [ValidateNever]
         public Category Category { get; set; }
     }
 }

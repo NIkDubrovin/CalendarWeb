@@ -18,5 +18,47 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.week-row {
+}
+
+.week-col {
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border: solid 1px;
+    border-left: 0;
+    border-bottom: 0;
+    border-color: black;
+}
+
+.week-col:first-child {
+    border-left: solid 1px;
+    border-color: black;
+}
+
+.days-row:last-child {
+    border-bottom: solid 1px;
+    border-color: gray;
+}
+
+.day {
+    width: 100px;
+    height: 100px;
+    border: solid 1px;
+    border-bottom: 0;
+    border-right: 0;
+    border-color: gray;
+}
+
+.day:last-child {
+    border-right: solid 1px;
+    border-color: gray;
 }

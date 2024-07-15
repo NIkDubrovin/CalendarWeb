@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Calendar.Models
 {
@@ -18,6 +19,7 @@ namespace Calendar.Models
         [DisplayName("Category Name")]
         public string Name { get; set; }
 
-        public string Color { get; set; }
+        [ValidateNever]
+        public string Color { get; set; } = string.Empty;
     }
 }

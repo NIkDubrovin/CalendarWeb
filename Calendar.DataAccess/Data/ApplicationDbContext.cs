@@ -24,7 +24,7 @@ namespace Calendar.DataAccess.Data
             );
 
             modelBuilder.Entity<Event>().HasData(
-                new Event { Id = 1, Title = "Test Event", StartDate = DateTime.Now });
+                new Event { Id = 1, Title = "Test Event", StartDate = DateTime.Now, CategoryId = 1 });
         }
     }
 }

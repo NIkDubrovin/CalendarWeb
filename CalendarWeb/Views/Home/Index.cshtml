@@ -1,1 +1,100 @@
-﻿
+﻿@model CalendarVM
+
+@{
+    void RenderCalendar()
+    {
+        DateTime firstDayOfMonth = new DateTime(Model.CurrentDate.Year, Model.CurrentDate.Month, 1);
+        DayOfWeek firstDayOfWeek = firstDayOfMonth.DayOfWeek;
+        int numberDaysInCurrentMonth = DateTime.DaysInMonth(Model.CurrentDate.Year, Model.CurrentDate.Month);
+        int numberDaysInLastMonth = DateTime.DaysInMonth(Model.CurrentDate.Year, Model.CurrentDate.AddMonths(-1).Month);
+        int numberDaysInNextMonth = DateTime.DaysInMonth(Model.CurrentDate.Year, Model.CurrentDate.AddMonths(1).Month);
+
+        int i = 0, dayIndex = 0;
+        <div class="row days-row">
+            @if (firstDayOfWeek != DayOfWeek.Sunday)
+            {
+                @for (i = 0; i < (int)firstDayOfWeek; i++)
+                {
+                    <div class="col day bg-primary">@(numberDaysInLastMonth - (int)firstDayOfWeek + i)</div>
+                }
+            }
+
+            @for (; i < 7; i++, dayIndex++)
+            {
+                <div class="col day">@(dayIndex + 1)</div>
+            }
+        </div>
+
+            int numberItems = numberDaysInCurrentMonth, dayInNextMonth = 0;
+            if (numberItems > 28) numberItems = 35;
+
+            for (int j = 0; j < numberItems / 7 - 1; j++)
+            {
+                <div class="row days-row row-cols-7">
+
+                @for (int k = 0; k < 7; k++, dayIndex++)
+                {
+                    @if (dayIndex >= numberDaysInCurrentMonth)
+                    {
+                        <div class="col day bg-primary">@(++dayInNextMonth)</div>
+                    }
+                    else
+                    {
+                        <div class="col day">@(dayIndex + 1)</div>
+                    }
+                }
+                </div>
+            }
+        }
+}
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Event Calendar</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i>  Create New Event
+                </a>
+            </div>
+        </div>
+
+        <div class="row py-3">
+            <div class="col-8 ps-5">
+                <h4 id="currentDate">@Model.CurrentDate.ToString("MMMM yyyy").TrimEnd()</h2>
+            </div>
+            <div class="col-4 text-end my-auto">
+                <a asp-controller="Home" asp-action="Left" asp-route-date="@Model.CurrentDate" class="btn btn-light"><i class="bi bi-chevron-left"></i></a>
+                <a asp-controller="Home" asp-action="Right" asp-route-date="@Model.CurrentDate" class="btn  btn-light"><i class="bi bi-chevron-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ------------------------------ week row ------------------------------- -->
+        <div class="container">
+            <div class="row week-row">
+                <div class="col week-col">Sun</div>
+                <div class="col week-col">Mon</div>
+                <div class="col week-col">Tue</div>
+                <div class="col week-col">Wed</div>
+                <div class="col week-col">Thu</div>
+                <div class="col week-col">Fri</div>
+                <div class="col week-col">Sat</div>
+            </div>
+        </div>
+
+        <div class="container days-table">
+            @{
+                RenderCalendar();
+            }
+        </div>
+
+    </div>
+</div>
