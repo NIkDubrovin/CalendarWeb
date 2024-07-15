@@ -10,9 +10,10 @@ namespace Calendar.Models.ViewModels
 {
     public class CalendarVM
     {
-        public IEnumerable<Event> Events { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<Event> Events { get; set; }
+
+        public Event _event { get; set; } = new Event();
 
         public DateTime CurrentDate { get; set; } = DateTime.Now;
     }

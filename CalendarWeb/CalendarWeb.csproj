@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Calendar.DataAccess\Calendar.DataAccess.csproj" />
     <ProjectReference Include="..\Calendar.Models\Calendar.Models.csproj" />
+    <ProjectReference Include="..\Utility\Calendar.Utils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using Calendar.DataAccess.Repository.IRepository;
 using Calendar.Models;
 using Calendar.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,13 +27,7 @@ namespace CalendarWeb.Controllers
             string n = DateTime.Now.ToString("MMMM yyyy").TrimEnd();
 
             CalendarVM calendarVM = new()
-            {
-                CategoryList = _unitOfWork.Category.
-                   GetAll().Select(u => new SelectListItem
-                   {
-                       Text = u.Name,
-                       Value = u.Id.ToString(),
-                   }),
+            {                
                 Events = new List<Event>()
             };
 
@@ -42,13 +37,7 @@ namespace CalendarWeb.Controllers
         public IActionResult Left(DateTime date)
         {
             CalendarVM calendarVM = new()
-            {
-                CategoryList = _unitOfWork.Category.
-                  GetAll().Select(u => new SelectListItem
-                  {
-                      Text = u.Name,
-                      Value = u.Id.ToString(),
-                  }),
+            {              
                 Events = new List<Event>(),
                 CurrentDate = date.AddMonths(-1)
             };
@@ -60,12 +49,6 @@ namespace CalendarWeb.Controllers
         {
             CalendarVM calendarVM = new()
             {
-                CategoryList = _unitOfWork.Category.
-                   GetAll().Select(u => new SelectListItem
-                   {
-                       Text = u.Name,
-                       Value = u.Id.ToString(),
-                   }),
                 Events = new List<Event>(),
                 CurrentDate = date.AddMonths(1)
             };
@@ -78,5 +61,45 @@ namespace CalendarWeb.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region API CALLS
+        //[HttpGet]
+        //public IActionResult Event(int? id)
+        //{
+        //    Event ev = _unitOfWork.Event.Get(p => p.Id == id);
+        //    return Json(new {data = ev});
+        //}
+
+        //[HttpDelete]
+        //public IActionResult Event(int? id)
+        //{
+        //    Event ev = _unitOfWork.Event.Get(p => p.Id == id);
+        //    return Json(new { data = ev });
+        //}
+
+        //[HttpPost]
+        //public IActionResult Event(Event ev)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (ev.Id == 0)
+        //        {
+        //            _unitOfWork.Event.Add(ev);
+        //        }
+        //        else
+        //        {
+        //            _unitOfWork.Event.Update(ev);
+        //        }
+
+        //        _unitOfWork.Save();
+        //        TempData["success"] = "Product created successfully";
+        //        return Json(new { data = "success" });
+        //    }
+        //    else
+        //    {
+        //        return Json(new { data = "error" });
+        //    }
+        //}
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,16 +12,15 @@ namespace Calendar.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(30)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime? Date { get; set; }
 
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        [ValidateNever]
-        public Category Category { get; set; }
+        [Required]
+        [Range(0, 0xFFFFFF, ErrorMessage = "Color is not valid.")]
+        public uint Color { get; set; }
     }
 }

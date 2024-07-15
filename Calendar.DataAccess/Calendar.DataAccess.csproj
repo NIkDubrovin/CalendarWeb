@@ -18,10 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Calendar.Models\Calendar.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\Utility\Calendar.Utils.csproj" />
   </ItemGroup>
 
 </Project>

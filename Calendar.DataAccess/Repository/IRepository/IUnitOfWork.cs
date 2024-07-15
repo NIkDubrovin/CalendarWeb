@@ -9,7 +9,6 @@ namespace Calendar.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        ICategoryRepository Category { get; }
         IEventRepository Event { get; }
 
         void Save();

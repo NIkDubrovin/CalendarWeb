@@ -1,4 +1,5 @@
-﻿@model CalendarVM
+﻿@using System.Drawing
+@model CalendarVM
 
 @{
     void RenderCalendar()
@@ -46,55 +47,156 @@
                 </div>
             }
         }
+
+    string[] colors = { "Black", "White", "Red", "Green", "Blue", "Yellow", "Cyan", "Magenta", "Gray", "Orange" };
 }
 
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Event Calendar</h2>
-            </div>
-        </div>
+<div class="toast bg-danger" id="errorToast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div class="card-body p-4">
-        <div class="row pb-3">
-            <div class="col-6">
-            </div>
-            <div class="col-6 text-end">
-                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i>  Create New Event
-                </a>
-            </div>
-        </div>
+    <div class="toast-body"></div>
+</div>
 
-        <div class="row py-3">
-            <div class="col-8 ps-5">
-                <h4 id="currentDate">@Model.CurrentDate.ToString("MMMM yyyy").TrimEnd()</h2>
-            </div>
-            <div class="col-4 text-end my-auto">
-                <a asp-controller="Home" asp-action="Left" asp-route-date="@Model.CurrentDate" class="btn btn-light"><i class="bi bi-chevron-left"></i></a>
-                <a asp-controller="Home" asp-action="Right" asp-route-date="@Model.CurrentDate" class="btn  btn-light"><i class="bi bi-chevron-right"></i></a>
-            </div>
-        </div>
+<div class="toast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="3000" id="successToast" role="" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Info</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body"></div>
+</div>
 
-        <!-- ------------------------------ week row ------------------------------- -->
-        <div class="container">
-            <div class="row week-row">
-                <div class="col week-col">Sun</div>
-                <div class="col week-col">Mon</div>
-                <div class="col week-col">Tue</div>
-                <div class="col week-col">Wed</div>
-                <div class="col week-col">Thu</div>
-                <div class="col week-col">Fri</div>
-                <div class="col week-col">Sat</div>
+<div class="modal fade" id="createEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create Event</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
+            <div class="modal-body">
+                <form id="createEventForm" method="post" action="javascript:void(0);" onsubmit="addEvent()">
+                    <input asp-for="_event.Id" type="hidden">
+                   
+                    <div class="border p-3">
+                         <div class="mb-3 row p-1">
+                            <label asp-for="_event.Title" class="p-0"></label>
+                            <input asp-for="_event.Title" type="text" id="create-title" class="form-control" />
+                            <span asp-validation-for="_event.Title" class="text-danger"></span>                           
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Date" class="p-0"></label>
+                            <input asp-for="_event.Date" type="datetime-local" id="create-date" class="form-control" />
+                            <span asp-validation-for="_event.Date" class="text-danger"></span>
+                        </div>                              
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Color" class="p-0"></label>
+                            <input id="color-input" asp-for="_event.Color" type="hidden" class="form-control">
+                            @for (int i = 0; i < colors.Length; i++)
+                            {
+                                <button type="button" class="color-button m-1" style="background-color: @( Utils.ColorToHexString(Color.FromName(colors[i])))">
+                                </button>
+                            }
 
-        <div class="container days-table">
-            @{
-                RenderCalendar();
-            }
-        </div>
+                            <label style="width:50px; height:50px;">
+                                <i class="bi bi-palette"></i>
+                                <input type="color" id="color-picker-input" class="color-picker-input" style="display:none;" width="0" height="0">
+                            </label>
 
+                            <span asp-validation-for="_event.Color" class="text-danger"></span>           
+                        </div>
+                    </div>
+                </form>
+            </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <button type="submit" form="createEventForm" class="btn btn-primary">Create</button>
+             </div>
+        </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row ">
+        <div class="col-3">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col">
+
+                        <!-- Card List -->
+                        <div class="card-group">
+                            <!-- Card 1 -->
+                            <div class="event-card card shadow border-0 my-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">2023-03-21</h5> <!-- Date at the top -->
+                                    <p class="card-text">Title of Card 1</p> <!-- Title at the bottom -->
+                                </div>
+                            </div>
+
+                            <!-- Add more cards here as needed -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-9">
+                <div class="card shadow border-0 my-4">
+                <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2 class="text-white py-2">Event Calendar</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row pb-3">
+                        <div class="col-6">
+                        </div>
+                        <div class="col-6 text-end">
+                            <a asp-controller="Home" asp-action="Upsert" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+                                <i class="bi bi-plus-circle"></i>  Create New Event
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row py-3">
+                        <div class="col-8 ps-5">
+                            <h4 id="currentDate">@Model.CurrentDate.ToString("MMMM yyyy")</h4>
+                        </div>
+                        <div class="col-4 text-end my-auto">
+                            <a asp-controller="Home" asp-action="Left" asp-route-date="@Model.CurrentDate" class="btn btn-light"><i class="bi bi-chevron-left"></i></a>
+                            <a asp-controller="Home" asp-action="Right" asp-route-date="@Model.CurrentDate" class="btn  btn-light"><i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- ------------------------------ week row ------------------------------- -->
+                    <div class="container">
+                        <div class="row week-row">
+                            <div class="col week-col">Sun</div>
+                            <div class="col week-col">Mon</div>
+                            <div class="col week-col">Tue</div>
+                            <div class="col week-col">Wed</div>
+                            <div class="col week-col">Thu</div>
+                            <div class="col week-col">Fri</div>
+                            <div class="col week-col">Sat</div>
+                        </div>
+                    </div>
+
+                    <div class="container days-table">
+                        @{
+                            RenderCalendar();
+                        }
+                    </div>
+
+                </div>
+            </div>
+            </div>    
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+}   

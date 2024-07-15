@@ -20,7 +20,6 @@ namespace Bulky.DataAccess.Repository
 		{
 			_db = db;
 			this.dbSet = _db.Set<T>();
-			_db.Events.Include(p => p.Category);
 		}
 
 		public void Add(T entity)
