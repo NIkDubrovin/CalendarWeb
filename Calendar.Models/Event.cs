@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace Calendar.Models
 {
@@ -15,9 +16,9 @@ namespace Calendar.Models
         public string? Title { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public string? Date { get; set; }
 
         [Required]
-        public string? Color { get; set; }
+        public string? Color { get; set; } = string.Empty;
     }
 }

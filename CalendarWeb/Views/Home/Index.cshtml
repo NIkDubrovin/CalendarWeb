@@ -11,12 +11,15 @@
         int numberDaysInNextMonth = DateTime.DaysInMonth(Model.CurrentDate.Year, Model.CurrentDate.AddMonths(1).Month);
 
         int i = 0, dayIndex = 0;
+      
         <div class="row days-row">
             @if (firstDayOfWeek != DayOfWeek.Sunday)
             {
                 @for (i = 0; i < (int)firstDayOfWeek; i++)
                 {
-                    <div class="col day day-nonactive">@(numberDaysInLastMonth - (int)firstDayOfWeek + i)</div>
+                    <div class="col day">
+                        <p class="day-nonactive"> </p>
+                    </div>
                 }
             }
 
@@ -24,16 +27,19 @@
             {
                 <div class="col day">
                     @(dayIndex + 1)
-                    @{
-                        foreach(var ev in @Model.Events)
+                    <div class="list-group day-list-events data-toggle=" collapse"">
+                        @foreach (var ev in @Model.Events)
                         {
-                            if(ev.Date.Day == i + 1)
+                            DateTime dateTime = DateTime.Parse(ev.Date);
+
+                            if (firstDayOfMonth.AddDays(dayIndex).Equals(dateTime.Date))
                             {
-                                <p style="background-color:@("#" + ev.Color)">@ev.Title</p>
-                                break;
+                                <a id="@ev.Id"  style="background-color:@("#" + ev.Color)" class="event-details-link btn day-event list-group-item list-group-item-action active" aria-current="true">
+                                    @ev.Title
+                                </a>
                             }
                         }
-                    }                 
+                    </div>
                 </div>
             }
         </div>
@@ -49,18 +55,33 @@
                 {
                     @if (dayIndex >= numberDaysInCurrentMonth)
                     {
-                        <div class="col day day-nonactive">@(++dayInNextMonth)</div>
+                        <div class="col day"><p class="day-nonactive"></p></div>
                     }
                     else
                     {
-                        <div class="col day">@(dayIndex + 1)</div>
+                        <div class="col day">
+                            @(dayIndex + 1)
+                            <div class="list-group day-list-events">
+                                @foreach (var ev in @Model.Events)
+                                {
+                                    DateTime dateTime = DateTime.Parse(ev.Date);
+
+                                    if (firstDayOfMonth.AddDays(dayIndex).Equals(dateTime.Date))
+                                    {
+                                        <a id="@ev.Id" style="background-color:@("#" + ev.Color)" class="event-details-link list-group-item list-group-item-action active day-event btn " aria-current="true">
+                                            @ev.Title
+                                        </a>
+                                    } 
+                                }
+                            </div>
+                        </div>
                     }
                 }
                 </div>
             }
         }
 
-    string[] colors = { "C0C0C0", "000000", "FF0000", "F4D03F", "00FF00", "00FFFF", "0000FF", "FF00FF", "800080" };
+    string[] colors = { "C0C0C0", "000000", "FF0000", "#DE3163", "800000", "F4D03F", "00FF00", "008000", "00FFFF", "0000FF", "FF00FF", "800080" };
 }
 
 <div class="toast bg-danger" id="errorToast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
@@ -110,11 +131,6 @@
                                 </button>
                             }
 
-                            <label style="width:50px; height:50px;">
-                                <i class="bi bi-palette"></i>
-                                <input type="color" id="color-input" style="display:none;" width="0" height="0">
-                            </label>
-
                             <span asp-validation-for="_event.Color" class="text-danger"></span>           
                         </div>
                     </div>
@@ -159,11 +175,6 @@
                                 </button>
                             }
 
-                            <label style="width:50px; height:50px;">
-                                <i class="bi bi-palette"></i>
-                                <input type="color" id="color-input"  style="display:none;" width="0" height="0">
-                            </label>
-
                             <span asp-validation-for="_event.Color" class="text-danger"></span>
                         </div>
                     </div>
@@ -172,6 +183,48 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" form="editEventForm" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailsEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Event</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editEventForm" method="post" action="javascript:void(0);">
+                    <input id="details-id" asp-for="_event.Id" type="hidden">
+
+                    <div class="border p-3">
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Title" class="p-0"></label>
+                            <input asp-for="_event.Title" disabled type="text" id="details-title" class="form-control" />
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Date" class="p-0"></label>
+                            <input asp-for="_event.Date" disabled type="datetime-local" id="details-date" class="form-control" />
+                            <span asp-validation-for="_event.Date" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="_event.Color" disabled class="p-0"></label>
+                            <input id="details-color-input" class="color-input" asp-for="_event.Color" type="hidden" class="form-control">
+                            @for (int i = 0; i < colors.Length; i++)
+                            {
+                                <button type="button" class="color-button m-1" style="background-color: @("#" + colors[i]);">
+                                </button>
+                            }
+
+                            <span asp-validation-for="_event.Color" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

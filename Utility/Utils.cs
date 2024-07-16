@@ -19,9 +19,17 @@ namespace Calendar.Utils
             return "#" + value.ToString("X");
         }
 
-        public static string ConvertDate(DateTime date)
+        public static string ConvertDate(string? date)
         {
-            return date.ToString("dddd - dd MMM hh:mm tt");
+            if (date == null)
+            {
+                return DateTime.MinValue.ToString("dddd d MMM hh:mm tt");
+            }
+            // Parsing the input datetime string
+            DateTime parsedDateTime = DateTime.Parse(date);
+
+            return parsedDateTime.ToString("dddd d MMM hh:mm tt");
+            //return date.ToString("dddd - dd MMM hh:mm tt");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿const uri = 'api/event';
+﻿const uri = window.location.origin + '/api/event';
+
+console.log()
 
 document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.color-button');
@@ -22,10 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const updateLinks = document.querySelectorAll('.event-update-link');
     const deleteLinks = document.querySelectorAll('.event-delete-link');
+    const detailsLinks = document.querySelectorAll('.event-details-link');
 
     updateLinks.forEach((button, index) => {
         button.addEventListener('click', function () {
             displayEditForm(this.id)
+        });
+    });
+
+    detailsLinks.forEach((button, index) => {
+        button.addEventListener('click', function () {
+            displayDetailsForm(this.id)
         });
     });
 
@@ -35,6 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#deleteEventModal').modal('show');
         });
     });
+
+    // Get today's date and format it as YYYY-MM-DD for the input date field
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+
+    // Set the default value of the input field to today's date
+    document.getElementById('create-date').value = formattedDate;
 });
 
 function getEvents() {
@@ -67,15 +83,17 @@ function addEvent() {
     })
     .then(response => {
         if (response.ok) {
-           window.location.reload();
+            window.location.reload();
 
             $('#successToast .toast-body').text('Event created!');
             var myToastEl = document.getElementById('successToast')
             var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
             if (myToast != null)
-            myToast.show()
+                myToast.show()
 
             $('#createEventModal').modal('hide');
+        } else {
+            console.log(response.json())
         }
     })
     .then(data => console.log(data))
@@ -148,15 +166,49 @@ function displayEditForm(id) {
          const buttons = document.querySelectorAll('.color-button');
 
          buttons.forEach((button, index) => {
-             button.style.border = 0;
+            
              let hexColor = rgbToHex(button.style.backgroundColor);
              if (hexColor.toUpperCase() == ColorInput.value.toUpperCase()) {
                  button.style.border = "5px solid black";
                  button.classList.add('active')
+             } else {
+                 button.style.border = 0;
              }
          });
     })
     .catch(error => console.error('Unable to get items.', error));
+}
+
+function displayDetailsForm(id) {
+    fetch(`${uri}/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            $('#detailsEventModal').modal('show');
+            const IdTextBox = document.getElementById('details-id');
+            const TitleTextBox = document.getElementById('details-title');
+            const DateInput = document.getElementById('details-date');
+            const ColorInput = document.getElementById('details-color-input');
+            const event = new Event(data.id, data.title, data.date, data.color);
+
+            IdTextBox.value = event.id;
+            TitleTextBox.value = event.title;
+            DateInput.value = event.date;
+            ColorInput.value = event.color;
+
+            const buttons = document.querySelectorAll('.color-button');
+
+            buttons.forEach((button, index) => {
+                if (button.style.backgroundColor == "") return;
+                let hexColor = rgbToHex(button.style.backgroundColor);
+                if (hexColor.toUpperCase() == ColorInput.value.toUpperCase()) {
+                    button.style.border = "5px solid black";
+                    button.classList.add('active')
+                } else {
+                    button.style.border = 0;
+                }
+            });
+        })
+        .catch(error => console.error('Unable to get items.', error));
 }
 
 function editEvent() {
