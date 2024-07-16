@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Calendar.DataAccess.Data;
@@ -19,8 +20,8 @@ namespace Bulky.DataAccess.Repository
 		public Repository(ApplicationDbContext db)
 		{
 			_db = db;
-			this.dbSet = _db.Set<T>();
-		}
+            this.dbSet = _db.Set<T>();
+        }
 
 		public void Add(T entity)
 		{

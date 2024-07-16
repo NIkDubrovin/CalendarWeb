@@ -22,7 +22,8 @@ namespace CalendarWeb.Controllers
         public IActionResult Get()
         {
             var events = _unitOfWork.Event.GetAll();
-            if(events == null)
+
+            if (events == null)
             {
                 return NotFound();
             }
