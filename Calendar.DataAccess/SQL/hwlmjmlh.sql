@@ -4,18 +4,6 @@
     CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
 );
 
-CREATE OR REPLACE FUNCTION get_all_event_ordered_by_id()
-RETURNS SETOF "Events"
-AS $$
-BEGIN
-    RETURN QUERY
-        SELECT * 
-        FROM "Events"
-        ORDER BY id;
-END;
-$$ LANGUAGE plpgsql;
-
-
 START TRANSACTION;
 
 CREATE TABLE "Events" (
@@ -42,6 +30,17 @@ SELECT setval(
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
 VALUES ('20240715224909_addEventTable', '8.0.7');
+
+CREATE OR REPLACE FUNCTION get_all_event_ordered_by_id()
+RETURNS SETOF "Events"
+AS $$
+BEGIN
+    RETURN QUERY
+        SELECT * 
+        FROM "Events"
+        ORDER BY id;
+END;
+$$ LANGUAGE plpgsql;
 
 COMMIT;
 
