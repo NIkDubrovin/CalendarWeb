@@ -3,6 +3,7 @@ using Calendar.DataAccess.Repository.IRepository;
 using Calendar.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Calendar.BLL;
 
 namespace CalendarWeb.Controllers
 {
@@ -21,7 +22,7 @@ namespace CalendarWeb.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var events = _unitOfWork.Event.GetAll();
+            var events = EventBLLHandler.GetEventList(_unitOfWork);
 
             if (events == null)
             {
@@ -34,7 +35,7 @@ namespace CalendarWeb.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Event ev = _unitOfWork.Event.Get(p => p.Id == id);
+            Event ev = EventBLLHandler.GetEvent(_unitOfWork, p => p.Id == id);
             if (ev == null)
             {
                 return NotFound();
@@ -48,8 +49,7 @@ namespace CalendarWeb.Controllers
         {
             if (ModelState.IsValid)
             {            
-                _unitOfWork.Event.Add(value);
-                _unitOfWork.Save();
+                EventBLLHandler.AddEvent(_unitOfWork, value);
                 return Ok(value);
             }
             else
@@ -69,7 +69,7 @@ namespace CalendarWeb.Controllers
                     return BadRequest();
                 }
 
-                var oldValue = _unitOfWork.Event.Get(e => e.Id == id);  
+                var oldValue = EventBLLHandler.GetEvent(_unitOfWork, p => p.Id == id); 
                 if (oldValue == null)
                 {
                     return NotFound();
@@ -79,8 +79,7 @@ namespace CalendarWeb.Controllers
                 oldValue.Date = value.Date;
                 oldValue.Color = value.Color;
 
-                _unitOfWork.Event.Update(value);
-                _unitOfWork.Save();
+                EventBLLHandler.UpdateEvent(_unitOfWork, oldValue);
                 
                 return Ok();
             }
@@ -99,13 +98,13 @@ namespace CalendarWeb.Controllers
                 return NotFound();
             }
 
-            Event? ev = _unitOfWork.Event.Get(c => c.Id == id);
+            Event? ev = EventBLLHandler.GetEvent(_unitOfWork, c => c.Id == id);
             if (ev == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Event.Remove(ev);
-            _unitOfWork.Save();
+
+            EventBLLHandler.Delete(_unitOfWork, ev);
 
             return Ok();
         }

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Calendar.DataAccess\Calendar.DataAccess.csproj" />
+    <ProjectReference Include="..\Calendar.Models\Calendar.Models.csproj" />
+    <ProjectReference Include="..\Utility\Calendar.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
